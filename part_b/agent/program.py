@@ -1,6 +1,7 @@
 # COMP30024 Artificial Intelligence, Semester 1 2023
 # Project Part B: Game Playing Agent
 
+import numpy as np
 from referee.game import \
     PlayerColor, Action, SpawnAction, SpreadAction, HexPos, HexDir
 
@@ -17,6 +18,13 @@ class Agent:
         Initialise the agent.
         """
         self._color = color
+        self._board = {} #empty board
+        
+        for i in range(7):
+            for j in range(7):
+                pos = (i, j)
+                self._board[pos] = (None, 0) # player, power
+        
         match color:
             case PlayerColor.RED:
                 print("Testing: I am playing as red")
@@ -40,8 +48,87 @@ class Agent:
         """
         match action:
             case SpawnAction(cell):
+                pos = tuple([int(i) for i in str(cell).split("-")])
+                self._board[pos] = (color, 1)
                 print(f"Testing: {color} SPAWN at {cell}")
                 pass
             case SpreadAction(cell, direction):
+                pos = tuple([int(i) for i in str(cell).split("-")])
+                power = self._board[pos][-1]
+                for i in power:
+                    newpos = change_position(array_add(pos,array_mul(direction,i)))
+                    newpower = self._board[newpos][-1]
+                    self._board[newpos] = (color, 1 + newpower)
                 print(f"Testing: {color} SPREAD from {cell}, {direction}")
                 pass
+        print(self._board)
+        #get_action(self)
+    
+def get_action(self):
+    board = self._board.copy
+    print(board)
+    
+def change_position(pointA):
+    return (pointA[0] % 7, pointA[1] % 7)
+
+def array_add (A, B):
+    return np.add(np.array(A),np.array(B))
+
+def array_mul (A, B):
+    return np.array(A) * B
+
+# def minimax(node, depth, maximizing_player, scores, children):
+#     if depth == 0 or node not in children:
+#         return scores[node]
+
+#     if maximizing_player:
+#         best_value = float('-inf')
+#         for child in children[node]:
+#             value = minimax(child, depth-1, False, scores, children)
+#             best_value = max(best_value, value)
+#         return best_value
+
+#     else: # minimizing player
+#         best_value = float('inf')
+#         for child in children[node]:
+#             value = minimax(child, depth-1, True, scores, children)
+#             best_value = min(best_value, value)
+#         return best_value
+
+# def MinimaxCutoff(state, depth, maximizingPlayer, evaluation, alpha, beta):
+#     if depth == 0 or state.isWin() or state.isLose():
+#         return evaluation(state), None
+
+#     if maximizingPlayer:
+#         bestScore = float('-inf')
+#         for action in state.getLegalActions():
+#             successor = state.generateSuccessor(action)
+#             score, _ = MinimaxCutoff(successor, depth - 1, False, evaluation, alpha, beta)
+#             if score > bestScore:
+#                 bestScore, bestAction = score, action
+#             if bestScore > beta:
+#                 return bestScore, bestAction
+#             alpha = max(alpha, bestScore)
+#         return bestScore, bestAction
+
+#     else:
+#         bestScore = float('inf')
+#         for action in state.getLegalActions():
+#             successor = state.generateSuccessor(action)
+#             score, _ = MinimaxCutoff(successor, depth - 1, True, evaluation, alpha, beta)
+#             if score < bestScore:
+#                 bestScore, bestAction = score, action
+#             if bestScore < alpha:
+#                 return bestScore, bestAction
+#             beta = min(beta, bestScore)
+#         return bestScore, bestAction
+
+# def Greedy(state, evaluationFunction):
+#     bestScore = float('-inf')
+#     bestAction = None
+#     for action in state.getLegalActions():
+#         successor = state.generateSuccessor(action)
+#         score = evaluationFunction(successor)
+#         if score > bestScore:
+#             bestScore, bestAction = score, action
+#     return bestAction
