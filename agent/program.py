@@ -76,18 +76,18 @@ class Agent:
                         return SpreadAction(HexPos(spreadspot[0], spreadspot[1]), HexDir(spreaddir))
                 
                 case PlayerColor.BLUE:
-                    score, actiontuple = get_action(self)
-                    # print(score, actiontuple)
+                    # score, actiontuple = get_action(self)
+                    # # print(score, actiontuple)
                     
-                    # choose to spawn
-                    if actiontuple[1] == "spawn":
-                        spawnspot = actiontuple[2]
-                        return SpawnAction(HexPos(spawnspot[0], spawnspot[1]))
-                    # choose to spread
-                    if actiontuple[1] == "spread":
-                        spreadspot = actiontuple[2]
-                        spreaddir = actiontuple[3]
-                        return SpreadAction(HexPos(spreadspot[0], spreadspot[1]), HexDir(spreaddir))
+                    # # choose to spawn
+                    # if actiontuple[1] == "spawn":
+                    #     spawnspot = actiontuple[2]
+                    #     return SpawnAction(HexPos(spawnspot[0], spawnspot[1]))
+                    # # choose to spread
+                    # if actiontuple[1] == "spread":
+                    #     spreadspot = actiontuple[2]
+                    #     spreaddir = actiontuple[3]
+                    #     return SpreadAction(HexPos(spreadspot[0], spreadspot[1]), HexDir(spreaddir))
                     return SpawnAction(HexPos(4, 4))
     def turn(self, color: PlayerColor, action: Action, **referee: dict):
         """
@@ -116,7 +116,7 @@ class Agent:
 def get_action(self):
     boardcopy = self._board.copy() # it is a copy of the board dict
     # evaluation score, new board after a selected action, action is spawn or spread, vector is spot when spawning or direction when spreading
-    score, actiontuple = minimax(boardcopy, MAX_DEPTH, False, self._color)
+    score, actiontuple = minimax(boardcopy, MAX_DEPTH, False, self._color, [])
     return score, actiontuple
 
     
@@ -159,8 +159,9 @@ def evalutation(board, color):
     # print(opponentpoints)
     
     #current version is the sum of the difference of power and points
-    return mypower - opponentpower + mypoints - opponentpoints
-
+    value = 0.6*(mypower - opponentpower) + 0.4*(mypoints - opponentpoints)
+    print(value)
+    return value
 # calculate power for a single color
 def calc_mypower(board, color):
     board_list = list(board.items())
@@ -193,10 +194,12 @@ def calc_totalpoints(board):
             sum += 1
     return sum
 
-def minimax(board, depth, maximizing_player, color):
-    # print("this is a new attempt:")
+def minimax(board, depth, maximizing_player, color, child):
+    print("this is a new attempt:")
+    if child != []:
+        print(child[1], child[2])
     if depth == 0:
-        return (evalutation(board, color), board)
+        return evalutation(board, color), child
     
     # set up the children for current board
     children = []
@@ -235,7 +238,7 @@ def minimax(board, depth, maximizing_player, color):
     if maximizing_player:
         best_value = float('-inf')
         for child in children:
-            value, attempt = minimax(child[0], depth-1, False, color)
+            value, child = minimax(child[0], depth-1, False, color, child)
             best_value = max(best_value, value)
         return best_value, child
 
@@ -243,11 +246,11 @@ def minimax(board, depth, maximizing_player, color):
         best_value = float('inf')
         for child in children:
             if color == PlayerColor.RED:
-                value, attempt = minimax(child[0], depth-1, True, PlayerColor.BLUE)
+                value, child = minimax(child[0], depth-1, True, PlayerColor.BLUE, child)
                 best_value = min(best_value, value)
             else:
-                value, attempt = minimax(child[0], depth-1, True, PlayerColor.RED)
-                best_value = min(best_value, value)
+                value, child = minimax(child[0], depth-1, True, PlayerColor.RED, child)
+                best_value, = min(best_value, value)
         return best_value, child
 
 # def MinimaxCutoff(state, depth, maximizingPlayer, evaluation, alpha, beta):
