@@ -159,7 +159,7 @@ def evalutation(board, color):
     # print(opponentpoints)
     
     #current version is the sum of the difference of power and points
-    value = 0.6*(mypower - opponentpower) + 0.4*(mypoints - opponentpoints)
+    value = 0.49*(mypower - opponentpower) + 0.51*(mypoints - opponentpoints)
     print(value)
     return value
 # calculate power for a single color
