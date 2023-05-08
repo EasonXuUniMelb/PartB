@@ -10,7 +10,7 @@ from referee.game import \
 # spreads a token at the centre of the board if playing as BLUE. This is
 # intended to serve as an example of how to use the referee API -- obviously
 # this is not a valid strategy for actually playing the game!
-MAX_DEPTH = 3
+MAX_DEPTH = 2
 
 UP = (1,- 1)
 UPLEFT = (0, -1)
@@ -76,19 +76,19 @@ class Agent:
                         return SpreadAction(HexPos(spreadspot[0], spreadspot[1]), HexDir(spreaddir))
                 
                 case PlayerColor.BLUE:
-                    score, actiontuple = get_action(self)
-                    # print(score, actiontuple)
+                    # score, actiontuple = get_action(self)
+                    # # print(score, actiontuple)
                     
-                    # choose to spawn
-                    if actiontuple[1] == "spawn":
-                        spawnspot = actiontuple[2]
-                        return SpawnAction(HexPos(spawnspot[0], spawnspot[1]))
-                    # choose to spread
-                    if actiontuple[1] == "spread":
-                        spreadspot = actiontuple[2]
-                        spreaddir = actiontuple[3]
-                        return SpreadAction(HexPos(spreadspot[0], spreadspot[1]), HexDir(spreaddir))
-                    # return SpawnAction(HexPos(4, 4))
+                    # # choose to spawn
+                    # if actiontuple[1] == "spawn":
+                    #     spawnspot = actiontuple[2]
+                    #     return SpawnAction(HexPos(spawnspot[0], spawnspot[1]))
+                    # # choose to spread
+                    # if actiontuple[1] == "spread":
+                    #     spreadspot = actiontuple[2]
+                    #     spreaddir = actiontuple[3]
+                    #     return SpreadAction(HexPos(spreadspot[0], spreadspot[1]), HexDir(spreaddir))
+                    return SpawnAction(HexPos(4, 4))
     def turn(self, color: PlayerColor, action: Action, **referee: dict):
         """
         Update the agent with the last player's action.
