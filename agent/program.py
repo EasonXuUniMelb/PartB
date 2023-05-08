@@ -116,7 +116,7 @@ class Agent:
 def get_action(self):
     boardcopy = self._board.copy() # it is a copy of the board dict
     # evaluation score, new board after a selected action, action is spawn or spread, vector is spot when spawning or direction when spreading
-    score, actiontuple = minimax(boardcopy, MAX_DEPTH, False, self._color, [])
+    score, actiontuple = minimax(boardcopy, MAX_DEPTH, True, self._color)
     return score, actiontuple
 
     
@@ -194,12 +194,12 @@ def calc_totalpoints(board):
             sum += 1
     return sum
 
-def minimax(board, depth, maximizing_player, color, child):
+best_child = None
+
+def minimax(board, depth, maximizing_player, color):
     print("this is a new attempt:")
-    if child != []:
-        print(child[1], child[2])
     if depth == 0:
-        return evalutation(board, color), child
+        return evalutation(board, color)
     
     # set up the children for current board
     children = []
@@ -238,20 +238,29 @@ def minimax(board, depth, maximizing_player, color, child):
     if maximizing_player:
         best_value = float('-inf')
         for child in children:
-            value, child = minimax(child[0], depth-1, False, color, child)
+            print(child[1], child[2])
+            value = minimax(child[0], depth-1, False, color)
             best_value = max(best_value, value)
-        return best_value, child
+            if best_value == value:
+                best_child = child
+        return best_value, best_child
 
     else: # minimizing player
         best_value = float('inf')
         for child in children:
+            print(child[1], child[2])
             if color == PlayerColor.RED:
-                value, child = minimax(child[0], depth-1, True, PlayerColor.BLUE, child)
+                value = minimax(child[0], depth-1, True, PlayerColor.BLUE)
                 best_value = min(best_value, value)
+                if best_value == value:
+                    best_child = child
             else:
-                value, child = minimax(child[0], depth-1, True, PlayerColor.RED, child)
-                best_value, = min(best_value, value)
-        return best_value, child
+                value = minimax(child[0], depth-1, True, PlayerColor.RED)
+                best_value = min(best_value, value)
+                if best_value == value:
+                    best_child = child
+        print(best_child)
+        return best_value, best_child
 
 # def MinimaxCutoff(state, depth, maximizingPlayer, evaluation, alpha, beta):
 #     if depth == 0 or state.isWin() or state.isLose():
