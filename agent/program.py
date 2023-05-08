@@ -116,7 +116,7 @@ class Agent:
 def get_action(self):
     boardcopy = self._board.copy() # it is a copy of the board dict
     # evaluation score, new board after a selected action, action is spawn or spread, vector is spot when spawning or direction when spreading
-    score, actiontuple = minimax(boardcopy, MAX_DEPTH, True, self._color)
+    score, actiontuple = minimax(boardcopy, MAX_DEPTH, True, self._color, self)
     return score, actiontuple
 
     
@@ -143,7 +143,7 @@ def get_direction(direction):
     if direction == "[↗]":
         return (1, 0)
 
-def evalutation(board, color):
+def evalutation(board, color, self):
     # find power
     mypower = calc_mypower(board, color)
     totalpower = calc_totalpower(board)
@@ -160,9 +160,11 @@ def evalutation(board, color):
     
     #current version is the sum of the difference of power and points
     value = 0.15*(mypower - opponentpower) + 0.85*(mypoints - opponentpoints)
+    if color == self._color:
+        return value
+    else:
+        return -value
     # value = mypower - opponentpower
-    print(value)
-    return value
 # calculate power for a single color
 def calc_mypower(board, color):
     board_list = list(board.items())
@@ -197,10 +199,10 @@ def calc_totalpoints(board):
 
 best_child = None
 
-def minimax(board, depth, maximizing_player, color):
+def minimax(board, depth, maximizing_player, color, self):
     print("this is a new attempt:")
     if depth == 0:
-        return evalutation(board, color), []
+        return evalutation(board, color, self), []
     
     # set up the children for current board
     children = []
@@ -240,7 +242,7 @@ def minimax(board, depth, maximizing_player, color):
         best_value = float('-inf')
         for child in children:
             print(child[1], child[2])
-            value, a = minimax(child[0], depth-1, False, color)
+            value, a = minimax(child[0], depth-1, False, color, self)
             if value > best_value:
                 best_value = max(best_value, value)
                 best_child = child
@@ -251,12 +253,12 @@ def minimax(board, depth, maximizing_player, color):
         for child in children:
             print(child[1], child[2])
             if color == PlayerColor.RED:
-                value, a = minimax(child[0], depth-1, True, PlayerColor.BLUE)
+                value, a = minimax(child[0], depth-1, True, PlayerColor.BLUE, self)
                 if value < best_value:
                     best_value = min(best_value, value)
                     best_child = child
             else:
-                value, a = minimax(child[0], depth-1, True, PlayerColor.RED)
+                value, a = minimax(child[0], depth-1, True, PlayerColor.RED, self)
                 if value < best_value:
                     best_value = min(best_value, value)
                     best_child = child
