@@ -242,7 +242,7 @@ def minimax(board, depth, maximizing_player, color):
             print(child[1], child[2])
             value, a = minimax(child[0], depth-1, False, color)
             best_value = max(best_value, value)
-            if best_value == value:
+            if best_value > value:
                 best_child = child
         return best_value, best_child
 
@@ -253,12 +253,12 @@ def minimax(board, depth, maximizing_player, color):
             if color == PlayerColor.RED:
                 value, a = minimax(child[0], depth-1, True, PlayerColor.BLUE)
                 best_value = min(best_value, value)
-                if best_value == value:
+                if best_value < value:
                     best_child = child
             else:
                 value, a = minimax(child[0], depth-1, True, PlayerColor.RED)
                 best_value = min(best_value, value)
-                if best_value == value:
+                if best_value < value:
                     best_child = child
         print(best_child)
         return best_value, best_child
