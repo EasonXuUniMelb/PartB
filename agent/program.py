@@ -10,7 +10,7 @@ from referee.game import \
 # spreads a token at the centre of the board if playing as BLUE. This is
 # intended to serve as an example of how to use the referee API -- obviously
 # this is not a valid strategy for actually playing the game!
-MAX_DEPTH = 2
+MAX_DEPTH = 1
 
 UP = (1,- 1)
 UPLEFT = (0, -1)
@@ -104,11 +104,15 @@ class Agent:
                 pos = tuple([int(i) for i in str(cell).split("-")])
                 power = self._board[pos][-1]
                 dir = get_direction(str(direction))
+                self._board[pos] = (None, 0)
                 for i in range(power):
                     newpos = change_position(array_add(pos,array_mul(dir,i+1)))
                     newpower = self._board[newpos][-1]
-                    self._board[pos] = (None, 0)
-                    self._board[newpos] = (color, 1 + newpower)
+                    if newpower == 6:
+                        self._board[newpos] = (None, 0)
+                        # print(self._board)
+                    else:
+                        self._board[newpos] = (color, 1 + newpower)
                 print(f"Testing: {color} SPREAD from {cell}, {direction}")
                 pass
         #print(self._board)
@@ -159,7 +163,8 @@ def evalutation(board, color, self):
     # print(opponentpoints)
     
     #current version is the sum of the difference of power and points
-    value = 0.15*(mypower - opponentpower) + 0.85*(mypoints - opponentpoints)
+    value = 0.5*(mypower - opponentpower) + 0.5*(mypoints - opponentpoints)
+    # value = mypower - opponentpower
     if color == self._color:
         return value
     else:
@@ -200,7 +205,7 @@ def calc_totalpoints(board):
 best_child = None
 
 def minimax(board, depth, maximizing_player, color, self):
-    print("this is a new attempt:")
+    # print("this is a new attempt:")
     if depth == 0:
         return evalutation(board, color, self), []
     
@@ -211,7 +216,7 @@ def minimax(board, depth, maximizing_player, color, self):
     # set:[(pos.r, pos.q), (color, power)]
     for set in list(board.items()):
         # we can make a spawn if nobody occupied this spot
-        if set[1][0] == None:
+        if set[1][0] == None and calc_totalpower(board) != 49:
             thispos = set[0]
             tempboard = board.copy()
             tempboard[thispos] = (color, 1)
@@ -230,10 +235,13 @@ def minimax(board, depth, maximizing_player, color, self):
             for dir in DIRECTION_LIST:
                 for power in range(thispower):
                     tempboard = board.copy()
+                    tempboard[thispos] = (None, 0)
                     newpos = change_position(array_add(thispos, array_mul(dir, power + 1)))
                     newpower = tempboard[newpos][1]
-                    tempboard[thispos] = (None, 0)
-                    tempboard[newpos] = (color, 1 + newpower)
+                    if newpower == 6:
+                        tempboard[newpos] = (None, 0)
+                    else:
+                        tempboard[newpos] = (color, 1 + newpower)
                     # temptuple contains three elements: (a new board, spawn/spread, spawn spot/direction vectror)
                     temptuple = (tempboard, "spread", thispos, dir)
                     children.append(temptuple)
@@ -241,7 +249,7 @@ def minimax(board, depth, maximizing_player, color, self):
     if maximizing_player:
         best_value = float('-inf')
         for child in children:
-            print(child[1], child[2])
+            # print(child[1], child[2])
             value, a = minimax(child[0], depth-1, False, color, self)
             if value > best_value:
                 best_value = max(best_value, value)
@@ -251,7 +259,7 @@ def minimax(board, depth, maximizing_player, color, self):
     else: # minimizing player
         best_value = float('inf')
         for child in children:
-            print(child[1], child[2])
+            # print(child[1], child[2])
             if color == PlayerColor.RED:
                 value, a = minimax(child[0], depth-1, True, PlayerColor.BLUE, self)
                 if value < best_value:
@@ -262,7 +270,7 @@ def minimax(board, depth, maximizing_player, color, self):
                 if value < best_value:
                     best_value = min(best_value, value)
                     best_child = child
-        print(best_child)
+        # print(best_child)
         return best_value, best_child
 
 # def MinimaxCutoff(state, depth, maximizingPlayer, evaluation, alpha, beta):
