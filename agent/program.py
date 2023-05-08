@@ -60,9 +60,8 @@ class Agent:
         else: #from second step
             match self._color:
                 case PlayerColor.RED:
-                    # return SpawnAction(HexPos(3, 3))
                     #action tuple: (new board after a selected action, action is spawn or spread, (optional if action is spread, this is the pos where it starts spreading), vector is spot when spawning or direction when spreading)
-                    score, actiontuple = get_action(self)
+                    actiontuple = get_action(self)
                     # print(score, actiontuple)
                     
                     # choose to spawn
@@ -76,19 +75,20 @@ class Agent:
                         return SpreadAction(HexPos(spreadspot[0], spreadspot[1]), HexDir(spreaddir))
                 
                 case PlayerColor.BLUE:
-                    # score, actiontuple = get_action(self)
-                    # # print(score, actiontuple)
+                    #action tuple: (new board after a selected action, action is spawn or spread, (optional if action is spread, this is the pos where it starts spreading), vector is spot when spawning or direction when spreading)
+                    actiontuple = get_action(self)
+                    # print(score, actiontuple)
                     
-                    # # choose to spawn
-                    # if actiontuple[1] == "spawn":
-                    #     spawnspot = actiontuple[2]
-                    #     return SpawnAction(HexPos(spawnspot[0], spawnspot[1]))
-                    # # choose to spread
-                    # if actiontuple[1] == "spread":
-                    #     spreadspot = actiontuple[2]
-                    #     spreaddir = actiontuple[3]
-                    #     return SpreadAction(HexPos(spreadspot[0], spreadspot[1]), HexDir(spreaddir))
-                    return SpawnAction(HexPos(4, 4))
+                    # choose to spawn
+                    if actiontuple[1] == "spawn":
+                        spawnspot = actiontuple[2]
+                        return SpawnAction(HexPos(spawnspot[0], spawnspot[1]))
+                    # choose to spread
+                    if actiontuple[1] == "spread":
+                        spreadspot = actiontuple[2]
+                        spreaddir = actiontuple[3]
+                        return SpreadAction(HexPos(spreadspot[0], spreadspot[1]), HexDir(spreaddir))
+                    # return SpawnAction(HexPos(4, 4))
     def turn(self, color: PlayerColor, action: Action, **referee: dict):
         """
         Update the agent with the last player's action.
@@ -121,7 +121,7 @@ def get_action(self):
     boardcopy = self._board.copy() # it is a copy of the board dict
     # evaluation score, new board after a selected action, action is spawn or spread, vector is spot when spawning or direction when spreading
     score, actiontuple = minimax(boardcopy, MAX_DEPTH, True, self._color, self)
-    return score, actiontuple
+    return actiontuple
 
     
 def change_position(pointA):
