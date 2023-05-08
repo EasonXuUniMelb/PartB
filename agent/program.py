@@ -76,19 +76,19 @@ class Agent:
                         return SpreadAction(HexPos(spreadspot[0], spreadspot[1]), HexDir(spreaddir))
                 
                 case PlayerColor.BLUE:
-                    # score, actiontuple = get_action(self)
-                    # # print(score, actiontuple)
+                    score, actiontuple = get_action(self)
+                    # print(score, actiontuple)
                     
-                    # # choose to spawn
-                    # if actiontuple[1] == "spawn":
-                    #     spawnspot = actiontuple[2]
-                    #     return SpawnAction(HexPos(spawnspot[0], spawnspot[1]))
-                    # # choose to spread
-                    # if actiontuple[1] == "spread":
-                    #     spreadspot = actiontuple[2]
-                    #     spreaddir = actiontuple[3]
-                    #     return SpreadAction(HexPos(spreadspot[0], spreadspot[1]), HexDir(spreaddir))
-                    return SpawnAction(HexPos(4, 4))
+                    # choose to spawn
+                    if actiontuple[1] == "spawn":
+                        spawnspot = actiontuple[2]
+                        return SpawnAction(HexPos(spawnspot[0], spawnspot[1]))
+                    # choose to spread
+                    if actiontuple[1] == "spread":
+                        spreadspot = actiontuple[2]
+                        spreaddir = actiontuple[3]
+                        return SpreadAction(HexPos(spreadspot[0], spreadspot[1]), HexDir(spreaddir))
+                    # return SpawnAction(HexPos(4, 4))
     def turn(self, color: PlayerColor, action: Action, **referee: dict):
         """
         Update the agent with the last player's action.
