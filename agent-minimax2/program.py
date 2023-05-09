@@ -1,3 +1,4 @@
+
 # COMP30024 Artificial Intelligence, Semester 1 2023
 # Project Part B: Game Playing Agent
 
@@ -25,6 +26,7 @@ DIRECTION_LIST = [UP, UPLEFT, UPRIGHT, DOWN, DOWNLEFT, DOWNRIGHT]
 
 class Agent:
     EMPTY = True
+    
     
     def __init__(self, color: PlayerColor, **referee: dict):
         """
@@ -123,152 +125,38 @@ def get_action(self):
     score, actiontuple = minimax(boardcopy, MAX_DEPTH, True, self._color, self, float('-inf'), float('inf'))
     return actiontuple
 
-    
-def change_position(pointA):
-    return (pointA[0] % 7, pointA[1] % 7)
-
-def array_add (A, B):
-    return np.add(np.array(A),np.array(B))
-
-def array_mul (A, B):
-    return np.array(A) * B
-
-def get_direction(direction):
-    if direction == "[↘]":
-        return (0, 1)
-    if direction == "[↓]":
-        return (-1, 1)
-    if direction == "[↙]":
-        return (-1, 0)
-    if direction == "[↖]":
-        return (0, -1)
-    if direction == "[↑]":
-        return (1, -1)
-    if direction == "[↗]":
-        return (1, 0)
-
 def evalutation(board, color, self):
+    opponentcolor = None
+    if color == PlayerColor.RED:
+        opponentcolor = PlayerColor.BLUE
+    else:
+        opponentcolor = PlayerColor.RED
+    
     # find power
     mypower = calc_mypower(board, color)
     totalpower = calc_totalpower(board)
     opponentpower = totalpower - mypower
     
-    #find points
+    # find points
     mypoints = calc_mypoints(board, color)
     totalpoints = calc_totalpoints(board)
     opponentpoints = totalpoints - mypoints
     
+    # calc intensity
+    myintensity = calc_avgdis(board, color)
+    opponentintensity = calc_avgdis(board, opponentcolor)
+    
     #current version is the sum of the difference of power and points
     # value = 0.5*(mypower - opponentpower) + 0.5*(mypoints - opponentpoints)
-    value = mypower - opponentpower
+    # value = mypower - opponentpower
+    # value = (mypower - opponentpower) + (myintensity - opponentintensity)
     if color == self._color:
-        return value
+        return 1*(mypower - opponentpower) + 1*myintensity
     else:
-        return -value
+        return -1*(mypower - opponentpower) + 1*opponentintensity
     # value = mypower - opponentpower
 
-# calculate power for a single color
-def calc_mypower(board, color):
-    board_list = list(board.items())
-    sum = 0
-    for set in board_list:
-        if color == set[1][0]:
-            sum += set[1][1]
-    return sum
-
-def calc_totalpower(board):
-    board_list = list(board.items())
-    sum = 0
-    for set in board_list:
-        sum += set[1][1]
-    return sum
-
-def calc_mypoints(board, color):
-    board_list = list(board.items())
-    sum = 0
-    for set in board_list:
-        if set[1][0] == color:
-            sum += 1
-    return sum
-
-def calc_totalpoints(board):
-    board_list = list(board.items())
-    sum = 0
-    for set in board_list:
-        if set[1][0] != None:
-            sum += 1
-    return sum
-
 best_child = None
-
-# def minimax(board, depth, maximizing_player, color, self):
-#     # print("this is a new attempt:")
-#     if depth == 0:
-#         return evalutation(board, color, self), []
-    
-#     # set up the children for current board
-#     children = []
-    
-#     # considering spawns
-#     # set:[(pos.r, pos.q), (color, power)]
-#     for set in list(board.items()):
-#         # we can make a spawn if nobody occupied this spot
-#         if set[1][0] == None and calc_totalpower(board) != 49:
-#             thispos = set[0]
-#             tempboard = board.copy()
-#             tempboard[thispos] = (color, 1)
-#             # temptuple contains three elements: (a new board, spawn/spread, spawn spot/direction vectror)
-#             temptuple = (tempboard, "spawn", thispos)
-#             children.append(temptuple)
-
-#     # considering spreads
-#     for set in list(board.items()):
-#         # correct color means this is my point
-#         if set[1][0] == color:
-#             thispos = set[0]
-#             thispower = set[1][1]
-            
-#             # loop six directions and powers to set up new points after spread
-#             for dir in DIRECTION_LIST:
-#                 for power in range(thispower):
-#                     tempboard = board.copy()
-#                     tempboard[thispos] = (None, 0)
-#                     newpos = change_position(array_add(thispos, array_mul(dir, power + 1)))
-#                     newpower = tempboard[newpos][1]
-#                     if newpower == 6:
-#                         tempboard[newpos] = (None, 0)
-#                     else:
-#                         tempboard[newpos] = (color, 1 + newpower)
-#                     # temptuple contains three elements: (a new board, spawn/spread, spawn spot/direction vectror)
-#                     temptuple = (tempboard, "spread", thispos, dir)
-#                     children.append(temptuple)
-                    
-#     if maximizing_player:
-#         best_value = float('-inf')
-#         for child in children:
-#             # print(child[1], child[2])
-#             value, a = minimax(child[0], depth-1, False, color, self)
-#             if value > best_value:
-#                 best_value = max(best_value, value)
-#                 best_child = child
-#         return best_value, best_child
-
-#     else: # minimizing player
-#         best_value = float('inf')
-#         for child in children:
-#             # print(child[1], child[2])
-#             if color == PlayerColor.RED:
-#                 value, a = minimax(child[0], depth-1, True, PlayerColor.BLUE, self)
-#                 if value < best_value:
-#                     best_value = min(best_value, value)
-#                     best_child = child
-#             else:
-#                 value, a = minimax(child[0], depth-1, True, PlayerColor.RED, self)
-#                 if value < best_value:
-#                     best_value = min(best_value, value)
-#                     best_child = child
-#         # print(best_child)
-#         return best_value, best_child
 
 def minimax(board, depth, maximizing_player, color, self, alpha, beta):
     # print("this is a new attempt:")
@@ -317,7 +205,7 @@ def minimax(board, depth, maximizing_player, color, self, alpha, beta):
         for child in children:
             # print(child[1], child[2])
             value, a = minimax(child[0], depth-1, False, color, self, alpha, beta)
-            if value > best_value:
+            if value >= best_value:
                 best_value = max(best_value, value)
                 best_child = child
             if best_value > beta:
@@ -331,14 +219,14 @@ def minimax(board, depth, maximizing_player, color, self, alpha, beta):
             # print(child[1], child[2])
             if color == PlayerColor.RED:
                 value, a = minimax(child[0], depth-1, True, PlayerColor.BLUE, self, alpha, beta)
-                if value < best_value:
+                if value <= best_value:
                     best_value = min(best_value, value)
                     best_child = child
                 if best_value < alpha:
                     return best_value, best_child
             else:
                 value, a = minimax(child[0], depth-1, True, PlayerColor.RED, self, alpha, beta)
-                if value < best_value:
+                if value <= best_value:
                     best_value = min(best_value, value)
                     best_child = child
                 if best_value < alpha:
@@ -347,30 +235,101 @@ def minimax(board, depth, maximizing_player, color, self, alpha, beta):
         # print(best_child)
         return best_value, best_child
 
-# def MinimaxCutoff(state, depth, maximizingPlayer, evaluation, alpha, beta):
-#     if depth == 0 or state.isWin() or state.isLose():
-#         return evaluation(state), None
+# calculate power for a single color
+def calc_mypower(board, color):
+    board_list = list(board.items())
+    sum = 0
+    for set in board_list:
+        if color == set[1][0]:
+            sum += set[1][1]
+    return sum
 
-#     if maximizingPlayer:
-#         bestScore = float('-inf')
-#         for action in state.getLegalActions():
-#             successor = state.generateSuccessor(action)
-#             score, _ = MinimaxCutoff(successor, depth - 1, False, evaluation, alpha, beta)
-#             if score > bestScore:
-#                 bestScore, bestAction = score, action
-#             if bestScore > beta:
-#                 return bestScore, bestAction
-#             alpha = max(alpha, bestScore)
-#         return bestScore, bestAction
+def calc_totalpower(board):
+    board_list = list(board.items())
+    sum = 0
+    for set in board_list:
+        sum += set[1][1]
+    return sum
 
+def calc_mypoints(board, color):
+    board_list = list(board.items())
+    sum = 0
+    for set in board_list:
+        if set[1][0] == color:
+            sum += 1
+    return sum
+
+def calc_totalpoints(board):
+    board_list = list(board.items())
+    sum = 0
+    for set in board_list:
+        if set[1][0] != None:
+            sum += 1
+    return sum
+    
+def change_position(pointA):
+    return (pointA[0] % 7, pointA[1] % 7)
+
+def array_add (A, B):
+    return np.add(np.array(A),np.array(B))
+
+def array_sub (A, B):
+    return np.subtract(np.array(A), np.array(B))
+
+def array_mul (A, B):
+    return np.array(A) * B
+
+def get_direction(direction):
+    if direction == "[↘]":
+        return (0, 1)
+    if direction == "[↓]":
+        return (-1, 1)
+    if direction == "[↙]":
+        return (-1, 0)
+    if direction == "[↖]":
+        return (0, -1)
+    if direction == "[↑]":
+        return (1, -1)
+    if direction == "[↗]":
+        return (1, 0)
+
+# def calc_avgdis(board, color):
+#     board_list = list(board.items())
+#     newmap = list()
+#     # newmap is a list of positions with all same color
+#     for set in board_list:
+#         if set[1][0] == color:
+#             newmap.append(set[0])
+    
+#     size = (len(newmap)-1) * (len(newmap)-1)
+#     total = 0
+#     for pos in newmap:
+#         for other in newmap:
+#             total += calc_dis(pos, other)
+#     if size <= 0:
+#         return 0
 #     else:
-#         bestScore = float('inf')
-#         for action in state.getLegalActions():
-#             successor = state.generateSuccessor(action)
-#             score, _ = MinimaxCutoff(successor, depth - 1, True, evaluation, alpha, beta)
-#             if score < bestScore:
-#                 bestScore, bestAction = score, action
-#             if bestScore < alpha:
-#                 return bestScore, bestAction
-#             beta = min(beta, bestScore)
-#         return bestScore, bestAction
+#         return total / size
+
+def calc_avgdis(board, color):
+    board_list = list(board.items())
+    xsum = 0
+    ysum = 0
+    size = 0
+    # newmap is a list of positions with all same color
+    for set in board_list:
+        if set[1][0] == color:
+            xsum += set[0][0]
+            ysum += set[0][1]
+            size += 1
+    
+    if size == 0:
+        return 0
+    else:
+        benchmark = (3,3)
+        center = ((xsum/size),(ysum/size))
+        return abs(calc_dis(benchmark, center))
+
+def calc_dis(A, B):
+    trans = array_sub(A, B)
+    return sum(trans)
