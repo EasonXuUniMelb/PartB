@@ -10,7 +10,7 @@ from referee.game import \
 # spreads a token at the centre of the board if playing as BLUE. This is
 # intended to serve as an example of how to use the referee API -- obviously
 # this is not a valid strategy for actually playing the game!
-MAX_DEPTH = 2
+MAX_DEPTH = 3
 
 UP = (1,- 1)
 UPLEFT = (0, -1)
@@ -147,11 +147,11 @@ def evalutation(board, color, self):
     #current version is the sum of the difference of power and points
     # value = 0.5*(mypower - opponentpower) + 0.5*(mypoints - opponentpoints)
     # value = mypower - opponentpower
-    value = (mypower - opponentpower) + (myintensity - opponentintensity)
+    # value = (mypower - opponentpower) + (myintensity - opponentintensity)
     if color == self._color:
-        return value
+        return 1*(mypower - opponentpower) + 1*myintensity
     else:
-        return -value
+        return -1*(mypower - opponentpower) + 1*opponentintensity
     # value = mypower - opponentpower
 
 best_child = None
@@ -291,24 +291,42 @@ def get_direction(direction):
     if direction == "[↗]":
         return (1, 0)
 
+# def calc_avgdis(board, color):
+#     board_list = list(board.items())
+#     newmap = list()
+#     # newmap is a list of positions with all same color
+#     for set in board_list:
+#         if set[1][0] == color:
+#             newmap.append(set[0])
+    
+#     size = (len(newmap)-1) * (len(newmap)-1)
+#     total = 0
+#     for pos in newmap:
+#         for other in newmap:
+#             total += calc_dis(pos, other)
+#     if size <= 0:
+#         return 0
+#     else:
+#         return total / size
+
 def calc_avgdis(board, color):
     board_list = list(board.items())
-    newmap = list()
+    xsum = 0
+    ysum = 0
+    size = 0
     # newmap is a list of positions with all same color
     for set in board_list:
         if set[1][0] == color:
-            newmap.append(set[0])
+            xsum += set[0][0]
+            ysum += set[0][1]
+            size += 1
     
-    size = (len(newmap)-1) * (len(newmap)-1)
-    total = 0
-    for pos in newmap:
-        for other in newmap:
-            total += calc_dis(pos, other)
-    if size <= 0:
+    if size == 0:
         return 0
     else:
-        return total / size
-
+        benchmark = (3,3)
+        center = ((xsum/size),(ysum/size))
+        return abs(calc_dis(benchmark, center))
 
 def calc_dis(A, B):
     trans = array_sub(A, B)
