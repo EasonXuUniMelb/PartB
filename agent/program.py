@@ -150,9 +150,9 @@ def evalutation(board, color, self):
     opponentpower = totalpower - mypower
     
     #find points
-    mypoints = calc_mypoints(board, color)
-    totalpoints = calc_totalpoints(board)
-    opponentpoints = totalpoints - mypoints
+    # mypoints = calc_mypoints(board, color)
+    # totalpoints = calc_totalpoints(board)
+    # opponentpoints = totalpoints - mypoints
     
     #current version is the sum of the difference of power
     value = mypower - opponentpower
