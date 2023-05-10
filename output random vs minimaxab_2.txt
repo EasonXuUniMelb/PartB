@@ -1,0 +1,500 @@
+Testing: I am playing as red
+Testing: I am playing as blue
+Testing: RED SPAWN at 3-3
+Testing: RED SPAWN at 3-3
+Testing: BLUE SPAWN at 0-0
+Testing: BLUE SPAWN at 0-0
+Testing: RED SPAWN at 5-0
+Testing: RED SPAWN at 5-0
+Testing: BLUE SPAWN at 0-1
+Testing: BLUE SPAWN at 0-1
+Testing: RED SPAWN at 6-4
+Testing: RED SPAWN at 6-4
+Testing: BLUE SPAWN at 0-2
+Testing: BLUE SPAWN at 0-2
+Testing: RED SPAWN at 3-2
+Testing: RED SPAWN at 3-2
+Testing: BLUE SPAWN at 0-3
+Testing: BLUE SPAWN at 0-3
+Testing: RED SPREAD from 6-4, [¡ü]
+Testing: RED SPREAD from 6-4, [¡ü]
+Testing: BLUE SPREAD from 0-2, [¨K]
+Testing: BLUE SPREAD from 0-2, [¨K]
+Testing: RED SPAWN at 1-0
+Testing: RED SPAWN at 1-0
+Testing: BLUE SPREAD from 0-0, [¨J]
+Testing: BLUE SPREAD from 0-0, [¨J]
+Testing: RED SPAWN at 0-4
+Testing: RED SPAWN at 0-4
+*******************************************************************************
+Welcome to Infexion referee version 2023.0.1.
+
+Conduct a game of Infexion between 2 Agent classes.
+
+Run `python -m referee --help` for additional usage information.
+*******************************************************************************
+* referee : all messages printed by referee/wrapper modules begin with *
+* referee : (any other lines of output must be from your Agent class).
+* referee : 
+* referee : wrapping player 1 [agent-random:Agent] as RED...
+* referee : wrapping player 2 [agent:Agent] as BLUE...
+* referee : let the game begin!
+* referee : player RED is initialising
+* referee : player BLUE is initialising
+* referee : RED to play (turn 1) ...
+* referee : RED plays action SPAWN(3, 3)
+* referee : 
+* referee : =========================== game board ===========================
+* referee : 
+* referee :                                 ..     
+* referee :                             ..      ..     
+* referee :                         ..      ..      ..     
+* referee :                     ..      ..      ..      ..     
+* referee :                 ..      ..      ..      ..      ..     
+* referee :             ..      ..      ..      ..      ..      ..     
+* referee :         ..      ..      ..      r1      ..      ..      ..     
+* referee :             ..      ..      ..      ..      ..      ..     
+* referee :                 ..      ..      ..      ..      ..     
+* referee :                     ..      ..      ..      ..     
+* referee :                         ..      ..      ..     
+* referee :                             ..      ..     
+* referee :                                 ..     
+* referee : 
+* referee : ==================================================================
+* referee : 
+* referee : BLUE to play (turn 2) ...
+* referee : BLUE plays action SPAWN(0, 0)
+* referee : 
+* referee : =========================== game board ===========================
+* referee : 
+* referee :                                 ..     
+* referee :                             ..      ..     
+* referee :                         ..      ..      ..     
+* referee :                     ..      ..      ..      ..     
+* referee :                 ..      ..      ..      ..      ..     
+* referee :             ..      ..      ..      ..      ..      ..     
+* referee :         b1      ..      ..      r1      ..      ..      ..     
+* referee :             ..      ..      ..      ..      ..      ..     
+* referee :                 ..      ..      ..      ..      ..     
+* referee :                     ..      ..      ..      ..     
+* referee :                         ..      ..      ..     
+* referee :                             ..      ..     
+* referee :                                 ..     
+* referee : 
+* referee : ==================================================================
+* referee : 
+* referee : RED to play (turn 3) ...
+* referee : RED plays action SPAWN(5, 0)
+* referee : 
+* referee : =========================== game board ===========================
+* referee : 
+* referee :                                 ..     
+* referee :                             r1      ..     
+* referee :                         ..      ..      ..     
+* referee :                     ..      ..      ..      ..     
+* referee :                 ..      ..      ..      ..      ..     
+* referee :             ..      ..      ..      ..      ..      ..     
+* referee :         b1      ..      ..      r1      ..      ..      ..     
+* referee :             ..      ..      ..      ..      ..      ..     
+* referee :                 ..      ..      ..      ..      ..     
+* referee :                     ..      ..      ..      ..     
+* referee :                         ..      ..      ..     
+* referee :                             ..      ..     
+* referee :                                 ..     
+* referee : 
+* referee : ==================================================================
+* referee : 
+* referee : BLUE to play (turn 4) ...
+* referee : BLUE plays action SPAWN(0, 1)
+* referee : 
+* referee : =========================== game board ===========================
+* referee : 
+* referee :                                 ..     
+* referee :                             r1      ..     
+* referee :                         ..      ..      ..     
+* referee :                     ..      ..      ..      ..     
+* referee :                 ..      ..      ..      ..      ..     
+* referee :             ..      ..      ..      ..      ..      ..     
+* referee :         b1      ..      ..      r1      ..      ..      ..     
+* referee :             b1      ..      ..      ..      ..      ..     
+* referee :                 ..      ..      ..      ..      ..     
+* referee :                     ..      ..      ..      ..     
+* referee :                         ..      ..      ..     
+* referee :                             ..      ..     
+* referee :                                 ..     
+* referee : 
+* referee : ==================================================================
+* referee : 
+* referee : RED to play (turn 5) ...
+* referee : RED plays action SPAWN(6, 4)
+* referee : 
+* referee : =========================== game board ===========================
+* referee : 
+* referee :                                 ..     
+* referee :                             r1      ..     
+* referee :                         ..      ..      ..     
+* referee :                     ..      ..      ..      ..     
+* referee :                 ..      ..      ..      ..      r1     
+* referee :             ..      ..      ..      ..      ..      ..     
+* referee :         b1      ..      ..      r1      ..      ..      ..     
+* referee :             b1      ..      ..      ..      ..      ..     
+* referee :                 ..      ..      ..      ..      ..     
+* referee :                     ..      ..      ..      ..     
+* referee :                         ..      ..      ..     
+* referee :                             ..      ..     
+* referee :                                 ..     
+* referee : 
+* referee : ==================================================================
+* referee : 
+* referee : BLUE to play (turn 6) ...
+* referee : BLUE plays action SPAWN(0, 2)
+* referee : 
+* referee : =========================== game board ===========================
+* referee : 
+* referee :                                 ..     
+* referee :                             r1      ..     
+* referee :                         ..      ..      ..     
+* referee :                     ..      ..      ..      ..     
+* referee :                 ..      ..      ..      ..      r1     
+* referee :             ..      ..      ..      ..      ..      ..     
+* referee :         b1      ..      ..      r1      ..      ..      ..     
+* referee :             b1      ..      ..      ..      ..      ..     
+* referee :                 b1      ..      ..      ..      ..     
+* referee :                     ..      ..      ..      ..     
+* referee :                         ..      ..      ..     
+* referee :                             ..      ..     
+* referee :                                 ..     
+* referee : 
+* referee : ==================================================================
+* referee : 
+* referee : RED to play (turn 7) ...
+* referee : RED plays action SPAWN(3, 2)
+* referee : 
+* referee : =========================== game board ===========================
+* referee : 
+* referee :                                 ..     
+* referee :                             r1      ..     
+* referee :                         ..      ..      ..     
+* referee :                     ..      ..      ..      ..     
+* referee :                 ..      ..      ..      ..      r1     
+* referee :             ..      ..      r1      ..      ..      ..     
+* referee :         b1      ..      ..      r1      ..      ..      ..     
+Testing: BLUE SPAWN at 0-0
+Testing: BLUE SPAWN at 0-0
+Testing: RED SPREAD from 0-4, [¨I]
+Testing: RED SPREAD from 0-4, [¨I]
+Testing: BLUE SPAWN at 0-2
+Testing: BLUE SPAWN at 0-2
+Testing: RED SPREAD from 0-3, [¨I]
+Testing: RED SPREAD from 0-3, [¨I]
+Testing: BLUE SPREAD from 1-0, [¡ı]
+Testing: BLUE SPREAD from 1-0, [¡ı]
+Testing: RED SPREAD from 0-0, [¨K]
+Testing: RED SPREAD from 0-0, [¨K]
+Testing: BLUE SPREAD from 6-2, [¡ü]
+Testing: BLUE SPREAD from 6-2, [¡ü]
+* referee :             b1      ..      ..      ..      ..      ..     
+* referee :                 b1      ..      ..      ..      ..     
+* referee :                     ..      ..      ..      ..     
+* referee :                         ..      ..      ..     
+* referee :                             ..      ..     
+* referee :                                 ..     
+* referee : 
+* referee : ==================================================================
+* referee : 
+* referee : BLUE to play (turn 8) ...
+* referee : BLUE plays action SPAWN(0, 3)
+* referee : 
+* referee : =========================== game board ===========================
+* referee : 
+* referee :                                 ..     
+* referee :                             r1      ..     
+* referee :                         ..      ..      ..     
+* referee :                     ..      ..      ..      ..     
+* referee :                 ..      ..      ..      ..      r1     
+* referee :             ..      ..      r1      ..      ..      ..     
+* referee :         b1      ..      ..      r1      ..      ..      ..     
+* referee :             b1      ..      ..      ..      ..      ..     
+* referee :                 b1      ..      ..      ..      ..     
+* referee :                     b1      ..      ..      ..     
+* referee :                         ..      ..      ..     
+* referee :                             ..      ..     
+* referee :                                 ..     
+* referee : 
+* referee : ==================================================================
+* referee : 
+* referee : RED to play (turn 9) ...
+* referee : RED plays action SPREAD(6, 4, 1, -1)
+* referee : 
+* referee : =========================== game board ===========================
+* referee : 
+* referee :                                 ..     
+* referee :                             r1      ..     
+* referee :                         ..      ..      ..     
+* referee :                     ..      ..      ..      ..     
+* referee :                 ..      ..      ..      ..      ..     
+* referee :             ..      ..      r1      ..      ..      ..     
+* referee :         b1      ..      ..      r1      ..      ..      ..     
+* referee :             b1      ..      ..      ..      ..      ..     
+* referee :                 b1      ..      ..      ..      ..     
+* referee :                     r2      ..      ..      ..     
+* referee :                         ..      ..      ..     
+* referee :                             ..      ..     
+* referee :                                 ..     
+* referee : 
+* referee : ==================================================================
+* referee : 
+* referee : BLUE to play (turn 10) ...
+* referee : BLUE plays action SPREAD(0, 2, 0, 1)
+* referee : 
+* referee : =========================== game board ===========================
+* referee : 
+* referee :                                 ..     
+* referee :                             r1      ..     
+* referee :                         ..      ..      ..     
+* referee :                     ..      ..      ..      ..     
+* referee :                 ..      ..      ..      ..      ..     
+* referee :             ..      ..      r1      ..      ..      ..     
+* referee :         b1      ..      ..      r1      ..      ..      ..     
+* referee :             b1      ..      ..      ..      ..      ..     
+* referee :                 ..      ..      ..      ..      ..     
+* referee :                     b3      ..      ..      ..     
+* referee :                         ..      ..      ..     
+* referee :                             ..      ..     
+* referee :                                 ..     
+* referee : 
+* referee : ==================================================================
+* referee : 
+* referee : RED to play (turn 11) ...
+* referee : RED plays action SPAWN(1, 0)
+* referee : 
+* referee : =========================== game board ===========================
+* referee : 
+* referee :                                 ..     
+* referee :                             r1      ..     
+* referee :                         ..      ..      ..     
+* referee :                     ..      ..      ..      ..     
+* referee :                 ..      ..      ..      ..      ..     
+* referee :             r1      ..      r1      ..      ..      ..     
+* referee :         b1      ..      ..      r1      ..      ..      ..     
+* referee :             b1      ..      ..      ..      ..      ..     
+* referee :                 ..      ..      ..      ..      ..     
+* referee :                     b3      ..      ..      ..     
+* referee :                         ..      ..      ..     
+* referee :                             ..      ..     
+* referee :                                 ..     
+* referee : 
+* referee : ==================================================================
+* referee : 
+* referee : BLUE to play (turn 12) ...
+* referee : BLUE plays action SPREAD(0, 0, 1, 0)
+* referee : 
+* referee : =========================== game board ===========================
+* referee : 
+* referee :                                 ..     
+* referee :                             r1      ..     
+* referee :                         ..      ..      ..     
+* referee :                     ..      ..      ..      ..     
+* referee :                 ..      ..      ..      ..      ..     
+* referee :             b2      ..      r1      ..      ..      ..     
+* referee :         ..      ..      ..      r1      ..      ..      ..     
+* referee :             b1      ..      ..      ..      ..      ..     
+* referee :                 ..      ..      ..      ..      ..     
+* referee :                     b3      ..      ..      ..     
+* referee :                         ..      ..      ..     
+* referee :                             ..      ..     
+* referee :                                 ..     
+* referee : 
+* referee : ==================================================================
+* referee : 
+* referee : RED to play (turn 13) ...
+* referee : RED plays action SPAWN(0, 4)
+* referee : 
+* referee : =========================== game board ===========================
+* referee : 
+* referee :                                 ..     
+* referee :                             r1      ..     
+* referee :                         ..      ..      ..     
+* referee :                     ..      ..      ..      ..     
+* referee :                 ..      ..      ..      ..      ..     
+* referee :             b2      ..      r1      ..      ..      ..     
+* referee :         ..      ..      ..      r1      ..      ..      ..     
+* referee :             b1      ..      ..      ..      ..      ..     
+* referee :                 ..      ..      ..      ..      ..     
+* referee :                     b3      ..      ..      ..     
+* referee :                         r1      ..      ..     
+* referee :                             ..      ..     
+* referee :                                 ..     
+* referee : 
+* referee : ==================================================================
+* referee : 
+* referee : BLUE to play (turn 14) ...
+* referee : BLUE plays action SPAWN(0, 0)
+* referee : 
+* referee : =========================== game board ===========================
+* referee : 
+* referee :                                 ..     
+* referee :                             r1      ..     
+* referee :                         ..      ..      ..     
+* referee :                     ..      ..      ..      ..     
+* referee :                 ..      ..      ..      ..      ..     
+* referee :             b2      ..      r1      ..      ..      ..     
+* referee :         b1      ..      ..      r1      ..      ..      ..     
+* referee :             b1      ..      ..      ..      ..      ..     
+* referee :                 ..      ..      ..      ..      ..     
+* referee :                     b3      ..      ..      ..     
+* referee :                         r1      ..      ..     
+* referee :                             ..      ..     
+* referee :                                 ..     
+* referee : 
+* referee : ==================================================================
+* referee : 
+* referee : RED to play (turn 15) ...
+* referee : RED plays action SPREAD(0, 4, 0, -1)
+* referee : 
+* referee : =========================== game board ===========================
+* referee : 
+* referee :                                 ..     
+* referee :                             r1      ..     
+* referee :                         ..      ..      ..     
+* referee :                     ..      ..      ..      ..     
+* referee :                 ..      ..      ..      ..      ..     
+* referee :             b2      ..      r1      ..      ..      ..     
+* referee :         b1      ..      ..      r1      ..      ..      ..     
+* referee :             b1      ..      ..      ..      ..      ..     
+* referee :                 ..      ..      ..      ..      ..     
+* referee :                     r4      ..      ..      ..     
+* referee :                         ..      ..      ..     
+* referee :                             ..      ..     
+* referee :                                 ..     
+* referee : 
+* referee : ==================================================================
+* referee : 
+* referee : BLUE to play (turn 16) ...
+* referee : BLUE plays action SPAWN(0, 2)
+* referee : 
+* referee : =========================== game board ===========================
+* referee : 
+* referee :                                 ..     
+* referee :                             r1      ..     
+* referee :                         ..      ..      ..     
+* referee :                     ..      ..      ..      ..     
+* referee :                 ..      ..      ..      ..      ..     
+* referee :             b2      ..      r1      ..      ..      ..     
+* referee :         b1      ..      ..      r1      ..      ..      ..     
+* referee :             b1      ..      ..      ..      ..      ..     
+* referee :                 b1      ..      ..      ..      ..     
+* referee :                     r4      ..      ..      ..     
+* referee :                         ..      ..      ..     
+* referee :                             ..      ..     
+* referee :                                 ..     
+* referee : 
+* referee : ==================================================================
+* referee : 
+* referee : RED to play (turn 17) ...
+* referee : RED plays action SPREAD(0, 3, 0, -1)
+* referee : 
+* referee : =========================== game board ===========================
+* referee : 
+* referee :                                 ..     
+* referee :                             r1      ..     
+* referee :                         ..      ..      ..     
+* referee :                     ..      ..      ..      ..     
+* referee :                 ..      ..      ..      ..      ..     
+* referee :             b2      ..      r1      ..      ..      ..     
+* referee :         r2      ..      ..      r1      ..      ..      ..     
+* referee :             r2      ..      ..      ..      ..      ..     
+* referee :                 r2      ..      ..      ..      ..     
+* referee :                     ..      ..      ..      ..     
+* referee :                         ..      ..      ..     
+* referee :                             ..      ..     
+* referee :                                 r1     
+* referee : 
+* referee : ==================================================================
+* referee : 
+* referee : BLUE to play (turn 18) ...
+* referee : BLUE plays action SPREAD(1, 0, -1, 1)
+* referee : 
+* referee : =========================== game board ===========================
+* referee : 
+* referee :                                 ..     
+* referee :                             r1      ..     
+* referee :                         ..      ..      b1     
+* referee :                     ..      ..      ..      ..     
+* referee :                 ..      ..      ..      ..      ..     
+* referee :             ..      ..      r1      ..      ..      ..     
+* referee :         r2      ..      ..      r1      ..      ..      ..     
+* referee :             b3      ..      ..      ..      ..      ..     
+* referee :                 r2      ..      ..      ..      ..     
+* referee :                     ..      ..      ..      ..     
+* referee :                         ..      ..      ..     
+* referee :                             ..      ..     
+* referee :                                 r1     
+* referee : 
+* referee : ==================================================================
+* referee : 
+* referee : RED to play (turn 19) ...
+* referee : RED plays action SPREAD(0, 0, 0, 1)
+* referee : 
+* referee : =========================== game board ===========================
+* referee : 
+* referee :                                 ..     
+* referee :                             r1      ..     
+* referee :                         ..      ..      b1     
+* referee :                     ..      ..      ..      ..     
+* referee :                 ..      ..      ..      ..      ..     
+* referee :             ..      ..      r1      ..      ..      ..     
+* referee :         ..      ..      ..      r1      ..      ..      ..     
+* referee :             r4      ..      ..      ..      ..      ..     
+* referee :                 r3      ..      ..      ..      ..     
+* referee :                     ..      ..      ..      ..     
+* referee :                         ..      ..      ..     
+* referee :                             ..      ..     
+* referee :                                 r1     
+* referee : 
+* referee : ==================================================================
+* referee : 
+* referee : BLUE to play (turn 20) ...
+* referee : BLUE plays action SPREAD(6, 2, 1, -1)
+* referee : 
+* referee : =========================== game board ===========================
+* referee : 
+* referee :                                 ..     
+* referee :                             r1      ..     
+* referee :                         ..      ..      ..     
+* referee :                     ..      ..      ..      ..     
+* referee :                 ..      ..      ..      ..      ..     
+* referee :             ..      ..      r1      ..      ..      ..     
+* referee :         ..      ..      ..      r1      ..      ..      ..     
+* referee :             b5      ..      ..      ..      ..      ..     
+* referee :                 r3      ..      ..      ..      ..     
+* referee :                     ..      ..      ..      ..     
+* referee :                         ..      ..      ..     
+* referee :                             ..      ..     
+* referee :                                 r1     
+* referee : 
+* referee : ==================================================================
+* referee : 
+* referee : RED to play (turn 21) ...
+* referee : RED plays action SPREAD(0, 2, 0, -1)
+* referee : 
+* referee : =========================== game board ===========================
+* referee : 
+* referee :                                 ..     
+* referee :                             r1      ..     
+* referee :                         ..      ..      ..     
+* referee :                     ..      ..      ..      ..     
+* referee :                 ..      ..      ..      ..      ..     
+* referee :             ..      ..      r1      ..      ..      ..     
+* referee :         r1      ..      ..      r1      ..      ..      ..     
+* referee :             r6      ..      ..      ..      ..      ..     
+* referee :                 ..      ..      ..      ..      ..     
+* referee :                     ..      ..      ..      ..     
+* referee :                         ..      ..      ..     
+* referee :                             ..      ..     
+* referee :                                 r2     
+* referee : 
+* referee : ==================================================================
+* referee : 
+* referee : game over, winner is RED
+* referee @ result: player 1 [agent-random:Agent]

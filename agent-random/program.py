@@ -1,7 +1,6 @@
 # COMP30024 Artificial Intelligence, Semester 1 2023
 # Project Part B: Game Playing Agent
 
-import numpy as np
 import random
 from referee.game import \
     PlayerColor, Action, SpawnAction, SpreadAction, HexPos, HexDir
@@ -159,10 +158,10 @@ def change_position(pointA):
     return (pointA[0] % 7, pointA[1] % 7)
 
 def array_add (A, B):
-    return np.add(np.array(A),np.array(B))
+    return (A[0]+B[0], A[1]+B[1])
 
 def array_mul (A, B):
-    return np.array(A) * B
+    return (A[0]*B, A[1]*B)
 
 def get_direction(direction):
     if direction == "[↘]":

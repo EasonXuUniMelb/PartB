@@ -2,7 +2,6 @@
 # COMP30024 Artificial Intelligence, Semester 1 2023
 # Project Part B: Game Playing Agent
 
-import numpy as np
 from referee.game import \
     PlayerColor, Action, SpawnAction, SpreadAction, HexPos, HexDir
 
@@ -151,9 +150,9 @@ def evalutation(board, color, self):
     # value = mypower - opponentpower
     # value = (mypower - opponentpower) + (myintensity - opponentintensity)
     if color == self._color:
-        return 1*(mypower - opponentpower) + 1*myintensity
+        return 1*(mypower - opponentpower) + 10*myintensity
     else:
-        return -1*(mypower - opponentpower) + 1*opponentintensity
+        return -1*(mypower - opponentpower) + 10*opponentintensity
     # value = mypower - opponentpower
 
 best_child = None
@@ -270,14 +269,14 @@ def calc_totalpoints(board):
 def change_position(pointA):
     return (pointA[0] % 7, pointA[1] % 7)
 
-def array_add (A, B):
-    return np.add(np.array(A),np.array(B))
-
 def array_sub (A, B):
-    return np.subtract(np.array(A), np.array(B))
+    return (A[0]-B[0], A[1]-B[1])
+
+def array_add (A, B):
+    return (A[0]+B[0], A[1]+B[1])
 
 def array_mul (A, B):
-    return np.array(A) * B
+    return (A[0]*B, A[1]*B)
 
 def get_direction(direction):
     if direction == "[↘]":
